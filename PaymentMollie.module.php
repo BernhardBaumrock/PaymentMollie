@@ -32,10 +32,12 @@ class PaymentMollie extends WireData implements Module {
    */
   private function getApiKey() {
     $key = '';
+    $mode = (int)$this->mode;
 
-    if($this->mode === 0) $key = $this->api_test;
-    elseif($this->mode === 1) $key = $this->api_live;
-    else {
+    if($mode == 0) $key = $this->api_test;
+    elseif($mode == 1) $key = $this->api_live;
+    elseif($mode == 2) {
+      // via config
       if($this->config->PaymentMollieMode == 1) $key = $this->api_live;
       else $key = $this->api_test;
     }
